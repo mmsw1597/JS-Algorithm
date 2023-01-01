@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = arr; //얕은 복사. arr 바꾸면 answer도 바뀜.
+        let sum = arr.reduce((acc, v) => {
+          return acc + v;
+        }, 0);
+
+        for (let i = 0; i < arr.length - 1; i++) {
+          for (let j = i + 1; j < arr.length; j++) {
+            if (sum - (arr[i] + arr[j]) === 100) {
+              arr.splice(i, 1);
+              arr.splice(j, 1); //오류! 뒤에꺼를 먼저 지우면 인덱스 오류가 안남.
+              //arr 변형했으므로 answer도 바뀜 따라서 answer에 대한 추가적인 코드 작성이 필요 없음.
+            }
+          }
+        }
+        return answer;
+      }
+
+      let arr = [20, 7, 23, 19, 10, 15, 25, 8, 13];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+<!-- 단순히 기존 난쟁이가 아닐 거 같은 난쟁이 2명을 뽑으면서 총합이 100인지 확인하면서 푼다. -->
+<!-- 9개 배열 총합을 구하고  2명을 뽑아서 뺐을때 합이 100이되면  2명은 가짜임-->
+<!-- splice는 배열에서 특정 인덱스 값을 제거할 때 용이함. -->
+<!-- 주의할점은 splice를 했을때 배열 인덱스가 당겨지게되고 단순히 i, j만 지우려고 하면 엉뚱한 값이 지워짐.-->

@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = [];
+        let sum = 0,
+          min = Number.MAX_SAFE_INTEGER;
+        for (let x of arr) {
+          if (x % 2 === 1) {
+            sum += x;
+            if (min > x) min = x;
+          }
+        }
+        answer.push(sum);
+        answer.push(min);
+        return answer;
+      }
+
+      arr = [12, 77, 38, 41, 53, 92, 85];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+<!--for of 반복문 사용법 익힐것.-->
+<!-- min을 반드시 MAX_SAFE_INTEGER로 초기화해야함 첫번째 원소가 홀수라는 보장이 없음. -->
