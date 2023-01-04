@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer;
+        answer = s.filter((v, i) => {
+          //if (s.indexOf(v, i + 1) === -1) return true;
+          if (s.indexOf(v) === i) return true; //발견된 첫번째 index만 반환된다는 것을 이용함.
+        });
+        return answer;
+      }
+      let str = ["good", "time", "good", "time", "student"];
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

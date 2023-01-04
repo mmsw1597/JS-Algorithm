@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = "";
+        for (let x of s) {
+          if (answer.indexOf(x) === -1) answer += x;
+        }
+        return answer;
+      }
+      console.log(solution("ksekkset"));
+    </script>
+  </body>
+</html>
+
+<!-- indexOf는 어떤 문자열에 특정 문자열이 있는지 없는지 확인하는 용도로 많이 사용됨 -->

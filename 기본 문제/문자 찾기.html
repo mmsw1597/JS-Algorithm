@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, t) {
+        let answer = s.split(t); // t로 문자열 구분짓기 결과는 t가 없는 t로 구분된 문자열 배열
+        return answer - 1;
+      }
+
+      let str = "COMPUTERPROGRAMMING";
+      console.log(solution(str, "R"));
+    </script>
+  </body>
+</html>
+
+<!-- split 쓸때 양 끝에 구분자가 있다면 배열에 빈 문자열이 들어감-->

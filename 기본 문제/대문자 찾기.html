@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = 0;
+        for (let x of s) {
+          if (x === x.toUpperCase()) answer++;
+          console.log("Z".charCodeAt()); //아스키코드값 출력 함수
+        }
+        return answer;
+      }
+
+      let str = "KoreaTimeGood";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+<!-- 아스키코드 이용해서 65~90값 찾는거도 가능함. 대문자는 97~122 -->
+<!-- JS스럽게 푸려면 toUpperCase 함수를 쓸것. 이때 호출한 x는 바뀌지 않음 -->

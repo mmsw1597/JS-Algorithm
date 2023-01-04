@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = s; //문자열은 얕은 복사가 아님. 값만 복사됨.
+        answer = answer.replace(/A/g, "#"); //정규 표현식
+        return answer;
+      }
+
+      let str = "BANANA";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+<!-- replace 함수 사용법 익힐 것 -->
+<!-- 간단한 해법은 for of 문 써서 하나하나 바꾸는 법임 -->
