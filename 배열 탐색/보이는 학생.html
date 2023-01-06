@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = 0,
+          max = Number.MIN_SAFE_INTEGER;
+        for (let x of arr) {
+          if (x > max) {
+            max = x;
+            answer++;
+          }
+        }
+        return answer;
+      }
+
+      let arr = [130, 135, 148, 140, 145, 150, 150, 153];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+<!-- max를 초기에 배열 첫번째 값으로 초기화하는 것도 좋은 방법 -->

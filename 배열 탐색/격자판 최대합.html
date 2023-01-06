@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = Number.MIN_SAFE_INTEGER;
+        let z = 0,
+          w = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+          let x = (y = 0);
+          for (let j = 0; j < arr.length; j++) {
+            x += arr[i][j];
+            y += arr[j][i];
+          }
+
+          //왜 굳이 for문 하나 더 선언했지..?
+          // for (let j = 0; j < arr.length; j++) {
+          //   y += arr[j][i];
+          // }
+          z += arr[i][i];
+          w += arr[i][arr.length - 1 - i];
+          //if (answer < x) answer = x;
+          //if (answer < y) answer = y;
+          Math.max(answer, x, y); //이게 더 깔끔한듯
+        }
+        if (answer < z) answer = z;
+        if (answer < w) answer = w;
+
+        return answer;
+      }
+
+      let arr = [
+        [10, 13, 10, 12, 15],
+        [12, 39, 30, 23, 11],
+        [11, 25, 50, 53, 15],
+        [19, 27, 29, 37, 27],
+        [19, 13, 30, 13, 19],
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+<!-- 담부턴 x, y 대신 sum1, sum2 변수명을 사용하는게 좋을듯 -->
+<!-- arr.legth는 변수 n에 따로 저장하는게 좋을 듯 -->

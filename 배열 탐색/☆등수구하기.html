@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let n = arr.length;
+        let answer = Array.from({ length: n }, () => 1);
+        console.log(answer);
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = 0; j < arr.length; j++) {
+            if (arr[i] < arr[j]) answer[i]++;
+          }
+        }
+        return answer;
+      }
+      let arr = [92, 92, 92, 100, 76];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+<!-- 조금 헤맸던 문제 -->
+<!-- O(N)으로 생각하고 안되면 그다음은 O(N^2)로 생각해보는게 좋음. -->
+<!-- answer 배열을 처음에 모두 1로 초기화 된 배열로 생각하고 문제를 풀어보면 좋을듯. -->
+<!-- Array.from 메서드 사용법 알아놓을것. -->
