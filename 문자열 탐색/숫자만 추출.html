@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        let answer = 0;
+        for (let x of str) {
+          if (!isNaN(x)) answer = answer * 10 + Number(x);
+        }
+
+        /*
+        for (let x of str) {
+          if (!isNaN(x)) answer += x;
+        }
+        */
+        //str = str.replace(/^\d/g, "");
+        return answer;
+      }
+
+      let str = "g0en2T0s8eSoft";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
