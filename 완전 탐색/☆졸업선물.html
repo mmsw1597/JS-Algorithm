@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, product) {
+        let answer = 0;
+        let n = product.length;
+
+        product.sort((a, b) => a[0] + a[1] - (b[0] + b[1]));
+        console.log(product);
+
+        for (let i = 0; i < n; i++) {
+          let res = 1; //할인 상품은 무조건 산다고 가정했으니까 1로 초기화
+          let tmp = m - (product[i][0] / 2 + product[i][1]); //최소 1개의 상품을 살 예산은 있기 때문에 이렇게 해도 됨.
+          for (let j = 0; j < n; j++) {
+            if (i !== j && product[j][0] + product[j][1] > tmp) break; //최적화. 할인 상품은 제외했고 정렬했기 때문에 j번째를 못산다면 이후 j+1부터는 다 못삼.
+            if (i !== j && product[j][0] + product[j][1] <= tmp) {
+              tmp -= product[j][0] + product[j][1];
+              res++;
+            }
+          }
+          answer = Math.max(answer, res);
+        }
+
+        return answer;
+      }
+
+      let arr = [
+        [6, 6],
+        [2, 2],
+        [4, 3],
+        [4, 5],
+        [10, 3],
+      ];
+      console.log(solution(28, arr));
+    </script>
+  </body>
+</html>
+
+<!-- 많이 헤맨 문제 -->
+<!-- 그리디 + 완전 탐색 문제임. 사준 학생 수만 중요하게 생각하는 것을 캐치해야함 -->
+<!-- 정렬하고나서 순서대로 사주면 됨.-->
