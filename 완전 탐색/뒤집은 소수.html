@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function isPrime(num) {
+        if (num === 1) return false;
+        for (let i = 2; i <= parseInt(num / 2); i++) {
+          if (num % i === 0) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      function solution(arr) {
+        let answer = [];
+        for (let x of arr) {
+          let res = 0;
+          while (x) {
+            res *= 10;
+            res += x % 10;
+            x = Math.floor(x / 10);
+          }
+          //x = x.toString().split("").reverse().join("");
+          //x = Number(x); //맨 앞에 0은 자동으로 사라지게 처리됨.
+          if (isPrime(res)) answer.push(res);
+        }
+        return answer;
+      }
+
+      let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+<!-- 소수 판별 함수를 작성하는게 중요한 문제 -->
+<!-- 1은 소수가 아님에 유의 -->
+<!-- 소수 판별시 본 숫자 / 2까지만 돌려도 됨. 직접 곱셈한거를 나열하면 /2 이후부터는 똑같이 반복되는것을 알 수 있음 16인 경우 (2*8 , 8*2) -->
+<!-- 본 숫자 제곱근 까지 돌려도 됨. -->
