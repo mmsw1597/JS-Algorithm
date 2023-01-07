@@ -8,20 +8,12 @@
       function solution(s) {
         let answer = "YES";
         let str = s.toLowerCase();
-        let n = Math.floor(s.length);
-        let flag = 0;
-        for (let i = 0; i < n; i++) {
-          if (str[i] !== str[n - 1 - i]) {
-            flag = 1;
-            break; //그냥 여기서 NO return하면 됨
-          }
-        }
-        if (flag) {
+        if (str.split("").reverse().join("") !== str) {
           answer = "NO";
         }
         return answer;
       }
-      let str = "gooob";
+      let str = "goooB";
       console.log(solution(str));
     </script>
   </body>
