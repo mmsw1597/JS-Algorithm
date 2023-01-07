@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = "YES";
+        let str = s.toLowerCase();
+        let n = Math.floor(s.length);
+        let flag = 0;
+        for (let i = 0; i < n; i++) {
+          if (str[i] !== str[n - 1 - i]) {
+            flag = 1;
+            break; //그냥 여기서 NO return하면 됨
+          }
+        }
+        if (flag) {
+          answer = "NO";
+        }
+        return answer;
+      }
+      let str = "gooob";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+<!-- 두 가지 방법 : 단순 for문으로 비교 , reverse 메서드 활용방법이 있음 -->
