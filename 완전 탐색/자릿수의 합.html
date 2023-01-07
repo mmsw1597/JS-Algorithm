@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, arr) {
+        let answer,
+          max = Number.MIN_SAFE_INTEGER;
+        answer = max;
+        for (let x of arr) {
+          let temp = x.toString().split("");
+          temp = temp.reduce((acc, v) => {
+            v = Number(v);
+            return acc + v;
+          }, 0);
+          if (max < temp) {
+            max = temp;
+            answer = x;
+          } else if (max === temp) {
+            if (answer < x) answer = x;
+          }
+        }
+        /*
+        let sum = 0, tmp = x;
+        while(tmp){
+          sum+=(tmp%10);
+          tmp = Math.floor(tmp/10);
+        }
+        */
+
+        return answer;
+      }
+
+      let arr = [128, 460, 603, 40, 521, 137, 123];
+      console.log(solution(7, arr));
+    </script>
+  </body>
+</html>
