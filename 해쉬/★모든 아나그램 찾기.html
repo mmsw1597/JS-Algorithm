@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function isAanagram(map1, map2) {
+        for (let [k, v] of map2) {
+          if (!map1.has(k) || map1.get(k) !== v) return false;
+        }
+        return true;
+      }
+
+      function solution(s, t) {
+        let answer = 0;
+        let sh1 = new Map();
+        let sh2 = new Map();
+
+        let n = s.length;
+        let m = t.length;
+
+        // t 문자열 map 객체 세팅
+        for (let x of t) {
+          if (sh2.has(x)) sh2.set(x, sh2.get(x) + 1);
+          else sh2.set(x, 1);
+        }
+
+        // s 문장열 map 객체 세팅 3-1 개만 넣는것도 좋은 방법임
+        for (let i = 0; i < m - 1; i++) {
+          if (sh1.has(s[i])) sh1.set(s[i], sh1.get(s[i]) + 1);
+          else sh1.set(s[i], 1);
+        }
+
+        // 실수 주의!!
+        // 재수없으면 틀렸음 (공개 테스트 케이스에서 마지막에 아나그램 없는 테케주고 비공개로 끝에 아나그램 있는 거 줬으면 틀림)
+        // 맨 마지막 슬라이드는 체크를 안하기 때문에 반복문 끝나고 한번 더 해야함
+        // 그리고 현재 문제에서 value가 0이면 그냥 delete로 삭제하는게 좋음
+        // 더 좋은 방법은 t 문자열이 3이니까 초기에 s문자열 map에 2개만 넣는 것도 좋음
+        // 현재 코드는 실수 수정한 코드임
+        // 나중에 lt, rt 변수 추가해서 더 깔끔하게 코드 작성해볼것
+        for (let i = m - 1; i < n; i++) {
+          if (sh1.has(s[i])) sh1.set(s[i], sh1.get(s[i]) + 1);
+          else sh1.set(s[i], 1);
+
+          if (isAanagram(sh1, sh2)) answer++;
+
+          sh1.set(s[i - m + 1], sh1.get(s[i - m + 1]) - 1);
+          if (sh1.get(s[i - m + 1]) === 0) sh1.delete(s[i - m + 1]);
+        }
+
+        return answer;
+      }
+
+      let a = "bacaAacba";
+      let b = "abc";
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
