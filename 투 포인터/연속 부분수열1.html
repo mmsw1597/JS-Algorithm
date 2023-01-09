@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        let answer = 0;
+        let p1 = 0;
+        let p2 = 0;
+        let n = arr.length;
+        let sum = arr[p1];
+        while (p1 < n && p2 < n) {
+          if (sum === m) {
+            answer++;
+            p2++;
+            sum += arr[p2];
+          } else if (sum < m) {
+            p2++;
+            sum += arr[p2];
+          } else {
+            sum -= arr[p1];
+            p1++;
+          }
+        }
+
+        //아래 코드는 필요없음 왜냐면 p2가 끝에 도달해서 끝나면 sum은 m보다 작은 상태고 그 상태에서 어떤 값을 빼봤자 m이 될 수 없음
+        // while (p1 < n) {
+        //   sum -= arr[p1];
+        //   if (sum === m) answer++;
+        //   p1++;
+        // }
+
+        return answer;
+      }
+
+      let a = [1, 1, 1, 2, 4];
+      console.log(solution(6, a));
+    </script>
+  </body>
+</html>
+
+<!-- p1은 왼쪽, p2는 오른쪽 포인터-->
+<!-- 중요한 점은 p1은 움직일때마다 빼기만 해야하고 p2는 더하기만 해야함 -->
