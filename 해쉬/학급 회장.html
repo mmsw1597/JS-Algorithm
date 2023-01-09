@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer;
+        let max = 0;
+        let hash = new Map();
+
+        for (let x of s) {
+          if (hash.has(x)) {
+            hash.set(x, hash.get(x) + 1);
+          } else {
+            hash.set(x, 1); //0 아님
+          }
+        }
+
+        for (let [k, v] of hash) {
+          if (max < v) {
+            max = v;
+            answer = k;
+          }
+        }
+
+        // hash.forEach((v, k, hash) => {
+        //   if (max < v) {
+        //     answer = k;
+        //     max = v;
+        //   }
+        // });
+
+        return answer;
+      }
+
+      let str = "BACBACCACCBDEDE";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
