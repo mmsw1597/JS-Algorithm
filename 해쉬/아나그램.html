@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str1, str2) {
+        let answer = "YES";
+        let sh = new Map();
+
+        for (let x of str1) {
+          if (sh.has(x)) sh.set(x, sh.get(x) + 1);
+          else sh.set(x, 1);
+        }
+
+        for (let x of str2) {
+          if (!sh.has(x) || sh.get(x) === 0) return "NO"; //OR 연산자는 좌항이 true면 우항은 체크하지 않음
+          sh.set(x, sh.get(x) - 1);
+        }
+
+        return answer;
+      }
+
+      let a = "abaCC";
+      let b = "Caaab";
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
+
+<!-- map 객체 하나로 할 거면 두번째 반복문에서 str2를 돌때 key가 있는지 확인하고 없으면 NO반환 있으면 카운트 1감소 -->
