@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer;
+        let stack = [0];
+        let a, b;
+
+        for (let x of s) {
+          if (isNaN(x)) {
+            b = stack.pop();
+            a = stack.pop();
+          } else {
+            x = Number(x);
+            stack.push(x);
+            continue;
+          }
+
+          if (x === "+") {
+            stack.push(a + b);
+          } else if (x === "-") {
+            stack.push(a - b);
+          } else if (x === "*") {
+            stack.push(a * b);
+          } else if (x === "/") {
+            stack.push(a / b);
+          }
+        }
+
+        return (answer = stack.pop());
+      }
+
+      let str = "35/";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+<!-- 좀더 똑똑하게 풀 필요가 있음.. -->
+<!-- 계산 결과를 다시 스택에 넣을 생각을 못함 -->
+<!-- 숫자인지 아닌지는 isNaN을 활용할 것 -->
