@@ -4,10 +4,13 @@ JS 알고리즘 문제 풀이
 
 # Index
 1. [forEach](#foreach)
-2. [map](#map)
+2. [map 고차함수](#map-고차함수)
 3. [filter](#filter)
 4. [reduce](#reduce)
 5. [charCodeAt](#charcodeat)
+6. [toUpperCase, toLowerCase](#touppercase-tolowercase)
+7. [splice](#splice)
+8. [최대 정수, 최소 정수](#최대-정수-최소-정수)
 
 # forEach
 
@@ -27,7 +30,7 @@ a.forEach(
 
 for문 대신에 사용되는 고차 함수로 보면 됨.
 
-# map
+# map 고차함수
 
 ```js
 a = [10, 11, 12, 13, 14, 15];
@@ -94,7 +97,7 @@ let answer = a.reduce(function (acc, v) {
 
 어떤 문자의 아스키코드 출력 함수.
 
-# toUpperCase, toLowerCase
+# toUpperCase toLowerCase
 
 어떤 문자열을 대문자, 소문자로 바꾸는 함수.
 
@@ -106,7 +109,9 @@ let answer = a.reduce(function (acc, v) {
 
 원본 배열이 바뀜에 주의.
 
-# Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER
+# 최대 정수 최소 정수
+
+Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER
 
 안정적인 정수의 최대, 최솟값 제공. Number 객체가 제공함.
 
