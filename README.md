@@ -2,6 +2,13 @@
 
 JS 알고리즘 문제 풀이
 
+# Index
+1. [forEach](#foreach)
+2. [map](#map)
+3. [filter](#filter)
+4. [reduce](#reduce)
+5. [charCodeAt](#charcodeat)
+
 # forEach
 
 ```js
