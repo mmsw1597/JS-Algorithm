@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(board, moves) {
+        let answer = 0;
+        let stack = [];
+
+        for (let x of moves) {
+          x--;
+          for (let i = 0; i < board.length; i++) {
+            if (board[i][x] !== 0) {
+              if (stack.length && stack[stack.length - 1] === board[i][x]) {
+                stack.pop();
+                answer += 2;
+              } else {
+                stack.push(board[i][x]);
+              }
+              board[i][x] = 0;
+              break;
+            }
+          }
+          /*
+            모법답안 (배열 음수 인덱스 처리는 해주는게 좋을듯)
+            moves.forEach(pos => {
+              for(let i=0; i<board.length; i++){
+                if(board[i][pos-1] !== 0){
+                  let tmp = board[i][pos-1];
+                  board[i][pos-1] = 0;
+                  if(tmp === stack[stack.length-1]){
+                    stack.pop();
+                    answer += 2;
+                  }else stack.push(tmp);
+                  break;
+                }
+              }
+            })
+          */
+          // 아래 코드가 필요없어짐
+          // if (stack.length >= 2) {
+          //   if (stack[stack.length - 1] === stack[stack.length - 2]) {
+          //     stack.pop();
+          //     stack.pop();
+          //     answer += 2;
+          //   }
+          // }
+        }
+
+        return answer;
+      }
+
+      let a = [
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 3],
+        [0, 2, 5, 0, 1],
+        [4, 2, 4, 4, 2],
+        [3, 5, 1, 3, 1],
+      ];
+
+      let b = [1, 5, 3, 5, 1, 2, 1, 4];
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
+
+<!-- 조금 더 똑똑하게 풀 수 있는 문제 -->
+<!-- 굳이 pop을 2번할 필요 없음 -->
