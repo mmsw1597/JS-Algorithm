@@ -7,16 +7,11 @@
     <script>
       function solution(n, k) {
         let answer;
-        let queue = [];
-
-        for (let i = 0; i < n; i++) {
-          queue.push(i + 1);
-        }
+        let queue = Array.from({ length: n }, (v, i) => i + 1); //이런거는 for문 쓰지마..
 
         while (queue.length !== 1) {
           for (let i = 0; i < k; i++) {
-            queue.push(queue[0]);
-            queue.splice(0, 1);
+            queue.push(queue.shift()); //shift 메서드 기억해두자
           }
           queue.splice(queue.length - 1, 1);
         }
