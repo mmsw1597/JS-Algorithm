@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, k) {
+        let answer;
+        let queue = [];
+
+        for (let i = 0; i < n; i++) {
+          queue.push(i + 1);
+        }
+
+        while (queue.length !== 1) {
+          for (let i = 0; i < k; i++) {
+            queue.push(queue[0]);
+            queue.splice(0, 1);
+          }
+          queue.splice(queue.length - 1, 1);
+        }
+        answer = queue[0];
+        return answer;
+      }
+
+      console.log(solution(8, 3));
+    </script>
+  </body>
+</html>
