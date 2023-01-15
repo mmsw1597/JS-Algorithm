@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = arr;
+        for (let i = 0; i < arr.length; i++) {
+          let min = i;
+
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[min] > arr[j]) min = j;
+          }
+
+          // let tmp = arr[min];
+          // arr[min] = answer[i];
+          // answer[i] = tmp;
+
+          [arr[i], arr[min]] = [arr[min], arr[i]]; //최신 자바스크립트 문법
+        }
+
+        return answer;
+      }
+
+      let arr = [13, 5, 11, 7, 23, 15];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
