@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function count(m, arr, mid) {
+        let sum = 0;
+        let res = [];
+        //머리 굴려보자~
+        for (let x of arr) {
+          if (sum + x <= mid)
+            sum += x; //조건문 설정이 좀 까다로움 머리 많이 써야함
+          else {
+            res.push(sum);
+            sum = x; //중요! 빼먹기 쉬움
+          }
+        }
+        res.push(sum);
+        let max = Math.max(...res);
+
+        if (res.length <= m) return true;
+        else return false;
+      }
+
+      function solution(m, songs) {
+        let answer = Number.MAX_SAFE_INTEGER;
+        let sum = songs.reduce((acc, v) => {
+          return acc + v;
+        }, 0);
+        let lt = Math.max(...songs); //스프레드 문법
+        let rt = sum; //꼭 sum일 필요없이 충분히 큰 수여도 가능함. 그치만 최적화를 위해선 sum이 최고
+        let mid;
+        while (lt <= rt) {
+          mid = Math.floor((lt + rt) / 2);
+          console.log(mid);
+          let res = count(m, arr, mid); //가장 중요한 부분
+          if (res) {
+            rt = mid - 1;
+            //answer = Math.min(mid, answer); //매 테스트 할때마다 answer는 최적값임 굳이 이럴 필요없음
+            answer = mid;
+          } else lt = mid + 1;
+        }
+
+        return answer;
+      }
+
+      let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>
+
+<!-- lt는 노래 중 가장 긴 노래 길이는 되어야 함 -->
+<!-- rt는 충분히 큰 수 이면 됨. 편의상 모든 노래 길이의 합으로 지정 -->
+<!-- 순서대로 채워 놓았을때 m보다 적게 나누어지면 그때 mid는 정답 후보가 가능함 이거를 아는게 중요함-->
+<!-- 용량이 남든 말든 어쨋든 가능한거를 알아야 함 -->
+<!-- 이때 mid가 정답 후보가 되면 더이상 mid보다 큰 값을 테스트할 필요가 없음 -->
+<!-- 답의 후보를 계속 넣으면서 최솟값을 찾아야함 (이거는 돼? 그러면 더 줄여보자. 이거는 안돼? 그러면 더 늘려보자) -->
+<!-- 스프레드 문법 활용까지 거를 타선이 없는 문제 -->
+<!-- 너무 어려운 문제같음.. 첨이라 그른가? -->

@@ -11,7 +11,7 @@
         let lt = 0;
         let rt = arr.length - 1;
         while (lt <= rt) {
-          let mid = Math.floor((lt + rt) / 2);
+          let mid = Math.floor((lt + rt) / 2); //js는  floor 해야줘야함
           if (target > arr[mid]) lt = mid + 1;
           else if (target < arr[mid]) rt = mid - 1;
           else {
