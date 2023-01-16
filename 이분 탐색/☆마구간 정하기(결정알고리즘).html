@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function count(dis, arr, cc) {
+        let cnt = 1;
+        let x1 = arr[0];
+        let res = [];
+
+        for (let i = 1; i < arr.length; i++) {
+          let x2 = arr[i];
+          if (x2 - x1 >= dis) {
+            res.push(x2 - x1);
+            x1 = arr[i];
+            cnt++;
+          }
+        }
+        console.log(res);
+        if (cnt >= cc) return Math.min(...res);
+        else return -1;
+      }
+
+      function solution(c, stable) {
+        let answer;
+        stable.sort((a, b) => a - b);
+
+        let lt = 1;
+        let rt = stable[stable.length - 1];
+
+        while (lt <= rt) {
+          let mid = Math.floor((lt + rt) / 2);
+          let dis = count(mid, stable, c);
+          console.log(mid);
+          if (dis === -1) rt = mid - 1;
+          else {
+            answer = mid;
+            lt = mid + 1;
+          }
+        }
+        return answer;
+      }
+
+      let arr = [1, 2, 8, 4, 9];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>
+
+<!-- 생각할 것도 없이 첫번째 말은 무조건 첫번째 좌표 -->
+<!-- 초기 lt, rt 값을 선정하는것도 중요함 -->
+<!-- 결정 알고리즘에서 이분 검색의 answer는 제대로 작성했다면 매 반복마다 항상 최적값 -->
