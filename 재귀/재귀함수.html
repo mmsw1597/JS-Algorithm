@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        function DFS(n) {
+          if (n === 0) return;
+          DFS(n - 1);
+          console.log(n);
+        }
+
+        DFS(n);
+      }
+
+      solution(3);
+    </script>
+  </body>
+</html>
+
+<!-- 재귀는 스택 자료구조를 이용한 알고리즘 -->
+<!-- 함수를 호출하면 스택프레임에 해당 함수의 매개변수, 지역변수, 복귀주소 등을 담는다 -->
+<!-- 함수를 실행하다가 도중에 함수 호출을 만나면 스택에 해당 함수를 또 쌓고 원래 실행중이던 함수는 대기상태에 돌입 -->
+<!-- 자기 위에 있던 함수가 종료되면 그 함수를 pop하고 아래에 있던 함수로 돌아감 -->
