@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, f) {
+        let answer,
+          flag = 0;
+        let comb = Array.from(Array(n + 1), () => Array(n + 1).fill(0));
+        let b = Array.from({ length: n }, (_, i) => 0);
+        let p = Array.from({ length: n }, () => 0);
+        let check = Array.from({ length: n + 1 }, () => 0);
+
+        function Combi(n, r) {
+          if (n === r) return 1;
+          if (r === 0) return 1;
+          if (comb[n][r]) return comb[n][r];
+          return (comb[n][r] = Combi(n - 1, r - 1) + Combi(n - 1, r));
+        }
+
+        function DFS(L) {
+          if (flag) return;
+
+          if (L === n) {
+            let sum = 0;
+            for (let k = 0; k < n; k++) {
+              sum += b[k] * p[k];
+            }
+            if (sum === f) {
+              answer = b.slice();
+              flag = true;
+            }
+            return;
+          }
+
+          for (let k = 1; k <= n; k++) {
+            if (!check[k]) {
+              check[k] = 1;
+              b[L] = k;
+              p[L] = Combi(n - 1, L);
+              DFS(L + 1);
+              check[k] = 0;
+              b[L] = 0;
+              p[L] = 0;
+            }
+          }
+
+          return;
+        }
+
+        console.log(comb);
+        DFS(0);
+        return answer;
+      }
+
+      console.log(solution(4, 16));
+    </script>
+  </body>
+</html>
+
+<!-- 이 문제는 여태 푼 재귀문제를 짬뽕한 문제 -->
+<!-- 이항계수, 파스칼 삼각형 배경지식이 필요함 모르면 그냥 못푸는 문제-->
+<!-- 굉장히 복잡함 -->
