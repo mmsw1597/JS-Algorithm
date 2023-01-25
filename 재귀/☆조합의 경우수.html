@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, r) {
+        let answer = [];
+        let dy = Array.from(Array(n + 1), () => Array(r + 1).fill(0));
+        //Array(n) : n은 행의 크기
+        //2차원 배열 초기화 기억해둘것
+
+        function DFS(dn, dr) {
+          if (dr === 0) return 1;
+          if (dr === dn) return 1;
+          if (dy[dn][dr]) return dy[dn][dr];
+
+          return (dy[dn][dr] = DFS(dn - 1, dr - 1) + DFS(dn - 1, dr));
+        }
+        console.log(dy);
+        answer = DFS(n, r);
+        return answer;
+      }
+
+      console.log(solution(33, 19));
+    </script>
+  </body>
+</html>
+
+<!-- nCr = n-1Cr-1 + n-1Cr -->
+<!-- n개 원소중 하나는 무조건 포함하고 고르는 경우의 수 + n개의 원소중 하나는 무조건 제하고 고르는 경우의 수 -->
+<!-- 숫자가 큰 케이스는 시간이 굉장히 오래걸림 -> 메모이제이션으로 해결 (overlapping subproblem을 한번만 푼다)-->
