@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, ps, pt) {
+        let answer = Number.MIN_SAFE_INTEGER;
+
+        function DFS(n, i, t) {
+          if (t > m) return;
+
+          if (i === ps.length) {
+            answer = Math.max(n, answer);
+            return;
+          }
+
+          DFS(n + ps[i], i + 1, t + pt[i]);
+          DFS(n, i + 1, t);
+        }
+
+        DFS(0, 0, 0);
+        return answer;
+      }
+
+      let ps = [10, 25, 15, 6, 7];
+      let pt = [5, 12, 8, 3, 4];
+      console.log(solution(20, ps, pt));
+    </script>
+  </body>
+</html>
