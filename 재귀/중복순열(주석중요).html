@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, m) {
+        let answer = [];
+        let tmp = [];
+
+        function DFS(L) {
+          if (L === m) {
+            let save = tmp.slice();
+            answer.push(save);
+            //실제 시험에서는 로그만 찍어도 될 확률이 높음
+            // console log가 더 적합할듯
+            return;
+          }
+
+          for (let k = 1; k <= n; k++) {
+            tmp.push(k);
+            DFS(L + 1);
+            tmp.pop(k);
+          }
+        }
+        DFS(0);
+        return answer;
+      }
+
+      console.log(solution(4, 3));
+    </script>
+  </body>
+</html>
+
+<!--다중 for문으로도 쉽게 풀리는 문제인데 왜 굳이 재귀를 사용할까? -->
+<!--총 2개만 뽑으면 이중 for문이긴한데 총 3개를 뽑아야하면 3중, 4개면 4중이 되어버림-->
+<!-- 즉, for문은 다양한 테스트 케이스에 대해 유연하지 못함-->
+<!-- 재귀는 그런 다양한 테스트케이스에 대해서 유연한 장점이 있음 -->
