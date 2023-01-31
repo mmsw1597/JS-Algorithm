@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(board) {
+        let answer = 0;
+        let d = [
+          [-1, 0],
+          [1, 0],
+          [0, 1],
+          [0, -1],
+          [1, 1],
+          [1, -1],
+          [-1, 1],
+          [-1, -1],
+        ];
+        let n = board.length;
+        let ch = Array.from(Array(n), () => Array(n).fill(0));
+
+        function DFS(y, x) {
+          for (let [dy, dx] of d) {
+            let ny = dy + y;
+            let nx = dx + x;
+
+            if (ny >= 0 && ny < n && nx >= 0 && ny < n) {
+              if (!ch[ny][nx] && board[ny][nx]) {
+                ch[ny][nx] = 1;
+                DFS(ny, nx);
+              }
+            }
+          }
+          return;
+        }
+
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            if (board[i][j] && !ch[i][j]) {
+              ch[i][j] = 1;
+              DFS(i, j);
+              answer++;
+            }
+          }
+        }
+
+        return answer;
+      }
+
+      let arr = [
+        [1, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0],
+        [1, 0, 1, 0, 1, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
