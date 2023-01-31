@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(board) {
+        let answer = 0;
+        let n = board.length;
+        let d = [
+          [-1, 0],
+          [1, 0],
+          [0, -1],
+          [0, 1],
+          [1, 1],
+          [1, -1],
+          [-1, 1],
+          [-1, -1],
+        ];
+        let ch = Array.from(Array(n), () => Array(n).fill(0));
+        let queue = [];
+
+        for (let y = 0; y < n; y++) {
+          for (let x = 0; x < n; x++) {
+            if (board[y][x] && !ch[y][x]) {
+              //BFS
+              //코드 상태를 보니 DFS가 더 적합한듯
+              answer++;
+              ch[y][x] = 1;
+              queue.push([y, x]);
+              while (queue.length) {
+                let v = queue.shift();
+                let vy = v[0];
+                let vx = v[1];
+                for (let [dy, dx] of d) {
+                  let ny = vy + dy;
+                  let nx = vx + dx;
+                  if (ny >= 0 && ny < n && nx >= 0 && nx < n) {
+                    if (board[ny][nx] && !ch[ny][nx]) {
+                      queue.push([ny, nx]);
+                      ch[ny][nx] = 1;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        return answer;
+      }
+
+      let arr = [
+        [1, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0],
+        [1, 0, 1, 0, 1, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
