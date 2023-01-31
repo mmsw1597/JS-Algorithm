@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(board) {
+        let answer = 0;
+        let d = [
+          [-1, 0],
+          [1, 0],
+          [0, -1],
+          [0, 1],
+        ];
+        let ch = Array.from(Array(board.length), () =>
+          Array(board.length).fill(0)
+        );
+        console.log(ch);
+        let n = board.length;
+
+        function DFS(x, y) {
+          if (x === 6 && y === 6) {
+            answer++;
+            return;
+          }
+
+          for (let [dy, dx] of d) {
+            if (x + dx >= 0 && x + dx < n && y + dy >= 0 && y + dy < n) {
+              if (!board[y + dy][x + dx] && !ch[y + dy][x + dx]) {
+                ch[y + dy][x + dx] = 1;
+                DFS(x + dx, y + dy);
+                ch[y + dy][x + dx] = 0;
+              }
+            }
+          }
+          return;
+        }
+        ch[0][0] = 1;
+        DFS(0, 0);
+
+        return answer;
+      }
+
+      let arr = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [1, 1, 0, 1, 0, 1, 1],
+        [1, 1, 0, 0, 0, 0, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
