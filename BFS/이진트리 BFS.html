@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution() {
+        let answer = "";
+        let queue = [];
+        queue.push(1);
+
+        while (queue.length) {
+          let v = queue.shift();
+          answer += v + " ";
+          for (let nv of [v * 2, v * 2 + 1]) {
+            if (nv > 7) continue;
+            queue.push(nv);
+          }
+        }
+        return answer;
+      }
+
+      console.log(solution());
+    </script>
+  </body>
+</html>
+
+<!-- 이진 트리를 너비우선탐색을 한다는 건 최단거리를 구한다는 의미 -->
+<!-- 목적지의 레벨이 최단 거리가 된다. -->
+<!-- BFS는 Queue를 활용하여 구현한다. -->
