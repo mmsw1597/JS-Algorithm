@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, e) {
+        let answer = 0;
+        let queue = [];
+        let ch = Array.from({ length: 10001 }, () => 0);
+        let move = [1, -1, 5];
+
+        ch[s] = 0;
+        queue.push(s);
+
+        while (queue.length) {
+          let v = queue.shift();
+          if (v === e) {
+            answer = ch[v];
+            break;
+          }
+          for (let m of move) {
+            if (v + m > 0 && v + m <= 10000 && !ch[v + m]) {
+              ch[v + m] = ch[v] + 1;
+              queue.push(v + m);
+            }
+          }
+        }
+
+        return answer;
+      }
+
+      console.log(solution(8, 3));
+    </script>
+  </body>
+</html>
+
+<!-- 처음에 queue에 배열을 원소로 해서 점프 횟수를 같이 넣었음 -->
+<!-- 근데 그럴 필요 없이 체크 배열에 거리를 기입하면 됨 -->
+<!-- 또는 트리의 레벨 값이 곧 답인데 이는 while문안에 queue의 길이만큼 for문을 돌게끔 하며 코드를 작성하면 구현 가능 -->
