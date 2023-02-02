@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        let answer = 0;
+        let dp = Array.from({ length: m + 1 }, () => 0);
+
+        for (let i = 1; i <= m; i++) {
+          for (let [score, time] of arr) {
+            if (i >= time) dp[i] = Math.max(dp[i], dp[i - time] + score);
+          }
+        }
+        answer = dp[m];
+        return answer;
+      }
+
+      let arr = [
+        [10, 5],
+        [25, 12],
+        [15, 8],
+        [6, 3],
+        [7, 4],
+      ];
+      console.log(solution(20, arr));
+    </script>
+  </body>
+</html>
