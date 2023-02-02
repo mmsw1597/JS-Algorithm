@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, coin) {
+        let answer = 0;
+        let n = coin.length;
+        let dp = Array.from({ length: m + 1 }, () => Number.MAX_SAFE_INTEGER);
+
+        dp[1] = 1;
+
+        for (let i = 2; i <= m; i++) {
+          coin.forEach((v) => {
+            if (v === i) {
+              dp[i] = 1;
+            } else {
+              if (i - v >= 0) dp[i] = Math.min(dp[i - v] + 1, dp[i]);
+            }
+          });
+        }
+        answer = dp[m];
+        return answer;
+      }
+
+      let arr = [1, 2, 5];
+      console.log(solution(14, arr));
+    </script>
+  </body>
+</html>
