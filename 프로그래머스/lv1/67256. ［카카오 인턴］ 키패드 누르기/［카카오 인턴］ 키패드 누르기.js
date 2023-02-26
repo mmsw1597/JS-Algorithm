@@ -1,65 +1,54 @@
 function solution(numbers, hand) {
     let answer = '';
-    const key = [[1, 2, 3], [4, 5, 6], [7, 8, 9], ["*", 0 , "#"]];
-    const k = [[0, 1], [0, -1], [1, 0], [-1, 0]];
-    let left = [3, 0];
-    let right = [3, 2];
-    hand = (hand === "right"? "R" : "L");
-     
-    function BFS(x, y, target){
-        const queue = [];
-        queue.push([0, y, x]);
+    let left = "*";
+    let right = '#';
+    hand = (hand === "right" ? "R" : "L");
+    const key = {
+        1 : [0, 0],
+        2 : [0, 1],
+        3 : [0, 2],
+        4 : [1, 0],
+        5 : [1, 1],
+        6 : [1, 2],
+        7 : [2, 0],
+        8 : [2, 1],
+        9 : [2, 2],
+        "*" : [3, 0],
+        0 : [3, 1],
+        "#" : [3, 2]
+    };
+    
+    function getDis(target, pos){
+        let [y, x] = pos;
+        let [ny, nx] = key[target];
         
-        while(queue.length){
-            let v = queue.shift();
-            let dis = v[0]
-            let vy = v[1];
-            let vx = v[2];
-            if(key[vy][vx] === target) {
-                return [dis, vy, vx];
-            }
-            for(let d of k){
-                let dy = d[0] + vy;
-                let dx = d[1] + vx;
-                
-                if(dy >= 0 && dy < 4 && dx >= 0 && dx < 3){
-                    queue.push([dis+1, dy, dx]);
-                }
-            }
-        }
+        return Math.abs(y-ny) + Math.abs(x-nx);
     }
     
     for(let n of numbers){
         if(n === 1 || n === 4 || n === 7){
-            let [dis, y, x] = BFS(left[1], left[0], n);
-            left = [y, x];
             answer += "L";
+            left = n;
         }
-        
         else if(n === 3 || n === 6 || n === 9){
-            let [dis, y, x] = BFS(right[1], right[0], n);
-            right = [y, x];
             answer += "R";
+            right = n;
         }
-        
         else{
-            let [l, ly, lx] = BFS(left[1], left[0], n);
-            let [r, ry, rx] = BFS(right[1], right[0], n);
-            if(l===r){
-                if(hand === "R"){
-                    right = [ry, rx];
-                }
-                else{
-                    left = [ly, lx];
-                }
+            const ldis = getDis(n, key[left]);
+            const rdis = getDis(n, key[right]);
+            if(ldis === rdis){
                 answer += hand;
-            }else if(r > l){
-                answer += "L";
-                left = [ly, lx];
-            }else{
+                if(hand === 'R') right = n;
+                else left = n;
+            }else if(ldis > rdis){
                 answer += "R";
-                right = [ry, rx];
+                right = n;
+            }else{
+                answer += "L";
+                left = n;
             }
+            
         }
     }
     
