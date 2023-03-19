@@ -3,11 +3,12 @@ function solution(orders, course) {
     let map = {};
     let tmp = [];
     let set;
+    let arr = [];
     
     function DFS(order, cur, max, idx){
         if(cur === max){
             let ttmp = tmp.slice();
-            set.add(ttmp.sort().join(""));
+            arr.push(ttmp.sort().join(""));
             return;
         }
         
@@ -22,10 +23,10 @@ function solution(orders, course) {
         map = {};
         max = 0;
         for(let order of orders){
-            set = new Set();
+            arr = []
             tmp = [];
             DFS(order, 0, c, 0);
-            for(let s of [...set]){
+            for(let s of arr){
                 map[s] = map[s] ? map[s] + 1 : 1;
                 if(map[s] > max) max = map[s];
             }
