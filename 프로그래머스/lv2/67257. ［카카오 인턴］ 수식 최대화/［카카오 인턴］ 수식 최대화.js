@@ -5,42 +5,39 @@ function solution(expression) {
     const visit = Array.from({length : op.length}, () => false);
     const tmp = [];
     const ch = "*";
-    console.log(op);
     
-    function cal(arr, type){
+    function cal(copy, type){
         if(type === "*"){
-            for(let x of arr){
-                const parse = x.split("*");
+            while(copy.includes(type)){
+                copy = copy.replace(/-?\d+\*-?\d+/, match => {
+                    const piece = match.split("*");
+                    return piece[0] * piece[1];
+                })
+            }
+        }else if(type === "+"){
+            while(copy.includes(type)){
+                copy = copy.replace(/-?\d+\+-?\d+/, match => {
+                    const piece = match.split("+");
+                    return +piece[0] + +piece[1];
+                })
+            }
+        }else{
+            while(copy.includes(type)){
+                copy = copy.replace(/-?\d+\&-?\d+/, match => {
+                    const piece = match.split("&");
+                    return piece[0] - piece[1];
+                })
             }
         }
+        
+        return copy;
     }
     
     function DFS(level){
         if(level === op.length){
-            let copy = expression;           
+            let copy = expression;
             for(let x of tmp){
-                if(x === "*"){
-                    while(copy.match(/\-{0,1}\d+\*\-{0,1}\d+/g)){
-                        copy = copy.replace(/\-{0,1}\d+\*\-{0,1}\d+/, match => {
-                            const parse = match.split("*");
-                            return parse[0] * parse[1];
-                        });
-                    }
-                }else if(x === "+"){
-                    while(copy.match(/\-{0,1}\d+\+\-{0,1}\d+/g)){
-                        copy = copy.replace(/\-{0,1}\d+\+\-{0,1}\d+/, match => {
-                            const parse = match.split("+");
-                            return +parse[0] + +parse[1];
-                        });
-                    }
-                }else{
-                    while(copy.match(/\-{0,1}\d+\&\-{0,1}\d+/g)){
-                        copy = copy.replace(/\-{0,1}\d+\&\-{0,1}\d+/, match => {
-                            const parse = match.split("&");
-                            return parse[0] - parse[1];
-                        });
-                    }
-                }
+                copy = cal(copy, x);
             }
             answer.push(Math.abs(+copy));
         }    
