@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      class Queue {
+        constructor() {
+          this.storage = {};
+          this.front = 0;
+          this.rear = 0;
+          this.size = 0;
+        }
+
+        head() {
+          if (this.size === 0) return null;
+          return this.storage[this.front];
+        }
+
+        add(value) {
+          this.storage[this.rear] = value;
+          this.rear += 1;
+          this.size += 1;
+        }
+
+        popleft() {
+          let tmp;
+          if (this.size === 0) return null;
+          if (this.size === 1) {
+            tmp = this.storage[this.front];
+            delete this.storage[this.front];
+            this.front = 0;
+            this.rear = 0;
+          } else {
+            tmp = this.storage[this.front];
+            delete this.storage[this.front];
+            this.front += 1;
+          }
+          this.size -= 1;
+          return tmp;
+        }
+      }
+    </script>
+  </body>
+</html>
