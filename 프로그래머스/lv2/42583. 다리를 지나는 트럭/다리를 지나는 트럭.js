@@ -19,6 +19,7 @@ class Queue{
     
     popleft(){
         let tmp;
+        if(this.size === 0) return null;
         if(this.size === 1){
             tmp = this.storage[this.front];
             delete this.storage[this.front];
@@ -77,8 +78,5 @@ function solution(bridge_length, weight, truck_weights) {
         }
         curT++;
     }
-    
-    console.log(complete);
-    
     return curT;
 }
