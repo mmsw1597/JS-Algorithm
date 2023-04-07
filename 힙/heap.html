@@ -70,9 +70,10 @@
           // 여기 매우 중요!!!!!!!!!!!!
           // 원소가 2개 밖에 없는데 this.heap[1] = this.heap.pop(); 실행해버리면 삭제가 안됨
           if (this.heap.length <= 2) this.heap = [null];
-          else this.heap[1] = this.heap.pop();
-          this.heap[1] = this.heap.pop(); //맨 끝의 노드를 루트노드로 이동시킴
-          this.heapify(this.heap.length - 1, 1); // 힙 재조정
+          else {
+            this.heap[1] = this.heap.pop(); //맨 끝의 노드를 루트노드로 이동시킴
+            this.heapify(this.heap.length - 1, 1); // 힙 재조정
+          }
           return ret;
         }
       }
