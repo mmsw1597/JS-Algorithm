@@ -1,21 +1,11 @@
 const fs = require("fs");
 let input = fs.readFileSync("/dev/stdin").toString().split("\n");
 
-let count = input[0];
-let numbers = [];
-let output = "";
+let count = +input[0];
+let result = [];
 
-for (let i = 1; i < input.length; i++) {
-  if (input[i] !== "") {
-    numbers.push(input[i].split(" "));
-  }
+for (let i = 1; i < count + 1; i++) {
+  let [a, b] = input[i].split(" ");
+  result.push(+a + +b);
 }
-
-for (let i = 0; i < numbers.length; i++) {
-  let num1 = Number(numbers[i][0]);
-  let num2 = Number(numbers[i][1]);
-
-  output += num1 + num2 + "\n";
-}
-
-console.log(output);
+console.log(result.join("\n"));
