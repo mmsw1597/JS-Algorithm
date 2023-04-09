@@ -9,3 +9,5 @@ for (let i = 1; i < count + 1; i++) {
   result.push(+a + +b);
 }
 console.log(result.join("\n"));
+
+// 백준에서의 JS 입출력
