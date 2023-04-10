@@ -1,18 +1,13 @@
 const fs = require("fs");
-let input = fs
-  .readFileSync("/dev/stdin")
-  .toString()
-  .trim()
-  .split("\n")
-  .map((v) => v.split(" ").map((v) => +v));
-const [n, m] = input.shift();
-const [v1, v2] = input.pop();
+let input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+const [n, m] = input[0].split(" ").map((v) => +v);
+const [v1, v2] = input[input.length - 1].split(" ").map((v) => +v);
 const graph = Array(n + 1)
   .fill()
   .map((_) => Array(n + 1).fill(Infinity));
 
-for (let i = 0; i < input.length; i += 1) {
-  let [u, v, w] = input[i];
+for (let i = 1; i < input.length - 1; i++) {
+  let [u, v, w] = input[i].split(" ").map((v) => +v);
   graph[u][v] = w;
   graph[v][u] = w;
 }
