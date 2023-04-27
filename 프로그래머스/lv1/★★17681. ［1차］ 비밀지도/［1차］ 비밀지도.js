@@ -1,42 +1,32 @@
+// 두 지도 중 어느 하나라도 벽이면 벽
+// 모두 공백이면 공백
+// 벽은 1 공백은 0
+
 function solution(n, arr1, arr2) {
-  let answer = [];
-  let map1 = [];
-  let map2 = [];
-
-  function bin(num) {
-    let str = [];
-    while (num) {
-      if (num % 2) str.push("#");
-      else str.push(" ");
-      num = Math.floor(num / 2);
+    let answer = [];
+   
+    for(let i = 0; i<n; i+=1){
+        let parse1 = arr1[i].toString(2);
+        let parse2 = arr2[i].toString(2);
+        
+        while(parse1.length < n) parse1 = "0" + parse1;
+        while(parse2.length < n) parse2 = "0" + parse2;
+        let res = "";
+        for(let j = 0; j<n; j+=1){
+            if(parse1[j] === "1" || parse2[j] === "1")
+                res += "#";
+            else // 둘다 0인 거는 위 조건문의 역임을 드모르간 법칙으로 쉽게 알 수 있다.
+                res += " ";
+        }
+        answer.push(res);
     }
-    for (let i = str.length; i < n; i++) {
-      str.push(" ");
-    }
-    return str.reverse().join("");
-  }
-
-  for (let x of arr1) {
-    map1.push(bin(x));
-  }
-
-  for (let x of arr2) {
-    map2.push(bin(x));
-  }
-
-  console.log(map1);
-
-  for (let i = 0; i < n; i++) {
-    let str = "";
-    for (let j = 0; j < n; j++) {
-      if (map1[i][j] === "#" || map2[i][j] === "#") str += "#";
-      else str += " ";
-    }
-    answer.push(str);
-  }
-
-  return answer;
+    
+    return answer;
 }
 
 //다시 풀때 개선해서 풀 것
 //조금 더 빨리 풀어 보자
+
+//===============================수정=========================================
+// toString을 사용하여 직접 이진수를 구현하지 않아도 됨
+// 훨씬 간략하게 코드를 수정해봤음
