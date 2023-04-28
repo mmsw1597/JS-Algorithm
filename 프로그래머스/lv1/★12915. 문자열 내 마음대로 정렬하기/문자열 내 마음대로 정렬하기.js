@@ -1,17 +1,17 @@
 function solution(strings, n) {
-  let answer = [];
+    strings.sort((a, b) => {
+        if(a[n] === b[n])
+            return a > b ? 1 : -1;
+        
+        return a[n].charCodeAt() - b[n].charCodeAt();
+    })
 
-  answer = strings.sort((a, b) => {
-    if (a[n] === b[n]) {
-      return a > b ? 1 : a < b ? -1 : 0;
-    }
-    return a[n] > b[n] ? 1 : a[n] < b[n] ? -1 : 0;
-  });
-
-  console.log(strings);
-
-  return answer;
+    return strings;
 }
 
 //문자끼리의 산술 연산은 NaN이 나옴
 //문자끼리 사전순으로 비교하려면 비교연산을 사용해야함
+
+// 수정
+// 문자열 전체를 사전순으로 비교하려면 비교연산을 사용할 것
+// sort 함수는 반환값이 음수면 a를 우선 양수면 b를 우선
