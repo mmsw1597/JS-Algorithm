@@ -17,7 +17,7 @@ const dp = Array(n + 1)
 const DFS = (num, cur, mem) => {
   if (num > n || dp[num][cur] >= mem) return;
 
-  dp[num][cur] = Math.max(mem, dp[num][cur]);
+  dp[num][cur] = mem;
   DFS(num + 1, cur + cost[num], mem + apps[num]);
   DFS(num + 1, cur, mem);
 };
