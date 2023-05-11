@@ -8,11 +8,10 @@ const stk = [];
 for (let x of str) {
   stk.push(x);
 
-  if (stk.length >= boom.length) {
+  if (x === boom[boom.length - 1]) {
     let tmp = stk.slice(stk.length - boom.length).join("");
-    while (stk.length >= boom.length && tmp === boom) {
+    if (tmp === boom) {
       for (let i = 0; i < boom.length; i += 1) stk.pop();
-      tmp = stk.slice(stk.length - boom.length).join("");
     }
   }
 }
