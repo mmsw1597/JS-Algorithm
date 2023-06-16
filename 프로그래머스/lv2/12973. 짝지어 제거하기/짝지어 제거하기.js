@@ -1,14 +1,13 @@
 function solution(s){
-    let answer = 0;
-    let stack = [];
+    const stack = [];
     
-    for(let c of s){
-        if(stack.length && stack[stack.length - 1] === c){
+    [...s].forEach(c => {
+        if(stack[stack.length - 1] === c){
             stack.pop();
         }else{
             stack.push(c);
         }
-    }
-    if(!stack.length) answer = 1;
-    return answer;
+    })
+    
+    return (!stack.length ? 1 : 0);
 }
