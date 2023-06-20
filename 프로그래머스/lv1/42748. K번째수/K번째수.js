@@ -1,10 +1,9 @@
 function solution(array, commands) {
     let answer = [];
     
-    commands.forEach((v, idx) => {
-        const [i, j, k] = v;
-        
-        answer.push(array.slice(i-1, j).sort((a,b)=>a-b)[k-1]);
+    commands.forEach(([i, j, k]) => {
+        i -= 1; k -= 1;
+        answer.push(array.slice(i, j).sort((a, b) => a - b)[k]);
     })
     
     return answer;
