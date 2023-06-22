@@ -1,29 +1,23 @@
-// 인형이 없는 곳에 크레인이 내려오면 아무일도 일어나지 않는다.
-// 바구니는 충분히 크다.
-// 사라진 인형 개수 return
-
 function solution(board, moves) {
     let answer = 0;
-    const stack = [];
-    const size = board.length;
+    let stack = [];
     
-    moves.forEach(x => {
-        x -= 1;
-        let y = 0; 
-        while(y < size){
-            if(board[y][x]){
-                if(stack[stack.length - 1] === board[y][x]){
+    for(let m of moves){
+        m -= 1;
+        for(let i = 0; i<board.length; i++){
+            if(board[i][m]){
+                if(stack[stack.length - 1] === board[i][m]){
                     stack.pop();
                     answer += 2;
-                }else{
-                    stack.push(board[y][x]);
+                    board[i][m] = 0;
+                    break;
                 }
-                board[y][x] = 0;
+                stack.push(board[i][m]);
+                board[i][m] = 0;
                 break;
             }
-            y++;
         }
-    })
+    }
     
     return answer;
 }
