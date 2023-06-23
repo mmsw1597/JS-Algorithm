@@ -1,27 +1,17 @@
 function solution(number) {
     let answer = 0;
-    let sum = 0;
-    let cnt = 0;
     
-    function DFS(idx){
-        if(cnt === 3){
-            if(sum === 0)
-                answer++;
+    function DFS(cnt, index, sum){
+        if(cnt >= 3){
+            if(sum === 0) answer++;
             return;
         }
-        
-        for(let i = idx; i<number.length; i++){
-            sum += number[i];
-            cnt++;
-            DFS(i+1);
-            sum -= number[i];
-            cnt--;
+        for(let i = index; i<number.length; i++){
+            DFS(cnt + 1, i + 1, sum + number[i]);
         }
-        
-        return;
     }
     
-    DFS(0);
+    DFS(0, 0, 0);
     
     return answer;
 }
