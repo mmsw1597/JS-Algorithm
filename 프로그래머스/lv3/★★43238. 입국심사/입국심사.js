@@ -28,3 +28,5 @@ function solution(n, times) {
     
     return answer;
 }
+
+// 이분 탐색
