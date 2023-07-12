@@ -1,42 +1,48 @@
 function solution(park, routes) {
-    const answer = [];
-    let curY = 0;
-    let curX = 0;
+    let answer = [];
+    let startY = 0;
+    let startX = 0;
     const H = park.length;
     const W = park[0].length;
-    
     const direction = {
+        N : [-1, 0],
         E : [0, 1],
-        W : [0, -1],
         S : [1, 0],
-        N : [-1, 0]
+        W : [0, -1]
     };
-    const route = routes.map(v => v.split(" "));
     
-    for(let i = 0; i < H; i++){
-        for(let j = 0; j < W; j++){
+    for(let i = 0; i<park.length; i+=1){
+        for(let j = 0; j<park[i].length; j+=1){
             if(park[i][j] === "S"){
-                curY = i;
-                curX = j;
+                startY = i;
+                startX = j;
+                break;
             }
         }
     }
     
-    for(let [dir, dis] of route){
-        const [dy, dx] = direction[dir];
-        let [ty, tx] = [curY, curX];
-        let [ny, nx] = [curY + dy , curX + dx];
-        dis = +dis;
+    for(let piece of routes){
+        let [dir, dis] = piece.split(" ");
+        let [dy, dx] = direction[dir];
+        let flag = false;
+        let ny = startY + (dy * dis);
+        let nx = startX + (dx * dis);
         
-        while(dis && ny >= 0 && ny < H && nx >= 0 && nx < W && park[ny][nx] !== "X"){
-            [ty, tx] = [ny, nx];
-            [ny, nx] = [ty + dy, tx + dx];
-            dis--;
+        if(ny >= H || ny < 0 || nx >= W || nx < 0)
+            continue;
+        
+        for(let i = 1; i<=dis; i+=1){
+            ny = startY + (dy * i);
+            nx = startX + (dx * i);
+            if(park[ny][nx] === "X"){
+                flag = true;
+                break;
+            }
         }
-        if(dis === 0){
-            [curY, curX] = [ty, tx];
-        }
+        if(flag) continue;
+        startY = ny;
+        startX = nx;
     }
-    
-    return [curY, curX];
+
+    return [startY, startX];
 }
