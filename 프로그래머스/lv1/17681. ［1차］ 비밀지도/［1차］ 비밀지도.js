@@ -4,25 +4,21 @@
 
 function solution(n, arr1, arr2) {
     let answer = [];
-    for(let i = 0; i<n; i++){
-        let binary1 = arr1[i].toString(2);
-        let binary2 = arr2[i].toString(2);
+   
+    for(let i = 0; i<n; i+=1){
+        let parse1 = arr1[i].toString(2);
+        let parse2 = arr2[i].toString(2);
         
-        while(binary1.length < n){
-            binary1 = "0" + binary1; 
+        while(parse1.length < n) parse1 = "0" + parse1;
+        while(parse2.length < n) parse2 = "0" + parse2;
+        let res = "";
+        for(let j = 0; j<n; j+=1){
+            if(parse1[j] === "1" || parse2[j] === "1")
+                res += "#";
+            else 
+                res += " ";
         }
-        
-        while(binary2.length < n){
-            binary2 = "0" + binary2;
-        }
-        
-        let result = "";
-        
-        for(let j = 0; j<n; j++){
-            result += (binary1[j] === "1" || binary2[j] === "1") ? "#" : " ";    
-        }
-        
-        answer.push(result);
+        answer.push(res);
     }
     
     return answer;
