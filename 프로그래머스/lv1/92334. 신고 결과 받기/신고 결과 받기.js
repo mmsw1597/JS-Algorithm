@@ -22,7 +22,7 @@ function solution(id_list, report, k) {
     id_list.forEach((name, index) => {
         const length = attackerMemory[name].size;
         if (length >= k) {
-            [...attackerMemory[name]].forEach(attacker => {
+            attackerMemory[name].forEach(attacker => {
                 const attackerIndex = indexMemory[attacker];
                 answer[attackerIndex]++;
             })
