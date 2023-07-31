@@ -1,31 +1,32 @@
+// 한 글자 X
+// 중복 글자 X
+
 function solution(n, words) {
-    let answer = [];
-    let prev = "";
-    let map = {};
-    let cnt = 1;
+    const memory = {};
     let round = 1;
+    let number = 1;
+    let prevWord = '';
     
-    function isValid(prev, word){
-        if(map[word]) return false;
-        if(prev !== "" && word[0] !== prev) return false;
-        if(word.length === 1) return false;
-        
-        return true;
-    }
-    let flag = false;
-    
-    for(let word of words){
-        if(!isValid(prev, word)){
-            flag = true;
-            break;
+    for(let word of words) {
+        if(prevWord && prevWord[prevWord.length - 1] !== word[0]) {
+            return [number, round];
         }
-        map[word] = true;
-        prev = word[word.length - 1];
-        cnt = (cnt + 1) % (n + 1);
-        if(!cnt) cnt = 1;
-        if(cnt === 1) round++;
+        if(memory[word]) {
+            return [number, round];
+        }
+        if(word.length === 1) {
+            return [number, round];
+        }
+        
+        memory[word] = true;
+        prevWord = word;
+        number += 1;
+        if(number > n) {
+            round += 1;
+            number = 1;
+        }
     }
-    if(!flag) return [0, 0];
+
     
-    return [cnt, round];
+    return [0, 0];
 }
