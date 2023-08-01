@@ -1,15 +1,5 @@
 function solution(price, money, count) {
-    let answer = 0;
-    let N = 1;
-    let sum = 0;
-    
-    while(count >= N){
-        sum += price * N;
-        N++;
-    }
-    
-    if(sum > money) answer = sum - money;
-    else answer = 0;
-
-    return answer;
+    const prices = Array.from({ length: count }, (_, i) => (i + 1) * price)
+    const result = money - prices.reduce((acc, v) => acc + v, 0)
+    return result >= 0 ? 0 : Math.abs(result);
 }
